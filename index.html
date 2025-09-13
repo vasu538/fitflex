@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitFlex</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: Arial, sans-serif; background: #000; color: #fff; line-height: 1.6;}
+    header {background: #111; padding: 20px; display: flex; justify-content: space-between; align-items: center;}
+    header h1 {color: limegreen;}
+    nav a {color: #fff; margin-left: 20px; text-decoration: none; font-weight: bold;}
+    nav a:hover {color: limegreen;}
+
+    section {padding: 60px 20px; max-width: 1100px; margin: auto;}
+
+    /* Flex layout for sections with images */
+    .flex-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .flex-section .text {flex:1; min-width:300px;}
+    .flex-section .image {flex:1; min-width:300px; text-align:center;}
+    .flex-section .image img {width:100%; max-width:400px; border-radius:10px;}
+
+    /* Home */
+    #home h2 {font-size: 2rem; color: limegreen; margin-bottom: 15px;}
+    #home button {background: limegreen; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; font-weight: bold;}
+    #home button:hover {background: #00ff00;}
+
+    /* Workouts */
+    #workouts h2 {color: limegreen; margin-bottom: 20px;}
+    .category-buttons {text-align: left; margin-bottom: 30px;}
+    .category-buttons button {
+      background: limegreen; border: none; margin: 5px; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;
+    }
+    .workout-grid {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 20px;
+    }
+    .workout-card {
+      background: #111; padding: 15px; border-radius: 10px; text-align: center;
+    }
+    .workout-card img {
+      width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;
+    }
+    .workout-card h3 {color: limegreen; margin-bottom: 10px;}
+
+    /* Blog */
+    #blog h2 {color: limegreen; margin-bottom: 20px;}
+    #blog p {font-size: 1.1rem;}
+    #motivational-quotes {margin-top: 30px; text-align: left; font-style: italic; color: #0f0;}
+
+    /* Contact */
+    #contact h2 {text-align: center; color: limegreen; margin-bottom: 20px;}
+    #contact p {text-align: center; font-size: 1.1rem;}
+
+    /* Login Page */
+    #login-page {display: none; padding: 60px 20px; max-width: 400px; margin: auto; text-align: center; background: #111; border-radius: 10px;}
+    #login-page h2 {color: limegreen; margin-bottom: 20px;}
+    #login-page input {width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none;}
+    #login-page button {background: limegreen; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold;}
+    #login-page button:hover {background: #00ff00;}
+
+    footer {text-align: center; padding: 20px; background: #111; color: #777; margin-top: 40px;}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FitFlex</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#workouts">Workouts</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+      <a href="#" onclick="showLogin()">Login</a>
+    </nav>
+  </header>
+
+  <!-- Login Page -->
+  <section id="login-page">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <br>
+    <button onclick="login()">Login</button>
+    <p id="login-msg" style="color:red; margin-top:10px;"></p>
+  </section>
+
+  <!-- Home -->
+  <section id="home" class="flex-section">
+    <div class="text">
+      <h2>Push Yourself Because No One Else Will</h2>
+      <p>Your fitness journey starts today. Stay consistent. Stay strong.</p>
+      <button onclick="document.getElementById('workouts').scrollIntoView({behavior:'smooth'})">View Workouts</button>
+    </div>
+    <div class="image">
+      <img src="C:\Users\bs01\Pictures\Saved Pictures\gym workout image.jpg" alt="Gym Workout">
+    </div>
+  </section>
+
+  <!-- Workouts -->
+  <section id="workouts" class="flex-section">
+    <div class="text">
+      <h2>Workout Categories</h2>
+      <div class="category-buttons">
+        <button onclick="showCategory('cardio')">Cardio</button>
+        <button onclick="showCategory('dumbbell')">Dumbbell</button>
+        <button onclick="showCategory('back')">Back</button>
+        <button onclick="showCategory('chest')">Chest</button>
+      </div>
+      <div id="workoutCards" class="workout-grid"></div>
+    </div>
+    <div class="image">
+      <img src="C:\Users\bs01\Pictures\Saved Pictures\workout image.jpg" alt="Workout Image">
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section id="blog" class="flex-section">
+    <div class="text">
+      <h2>Our Story</h2>
+      <p>
+        At FitFlex, we believe fitness is not just about the body—it’s about the mind too.
+        Our journey started with a single goal: to make workouts accessible to everyone. 
+        Stay motivated, stay strong. Every rep brings you closer to your best self.
+      </p>
+      <div id="motivational-quotes">
+        <p>"The only bad workout is the one that didn’t happen."</p>
+        <p>"Don’t limit your challenges, challenge your limits."</p>
+        <p>"Sweat is just fat crying."</p>
+      </div>
+    </div>
+    <div class="image">
+      <img src="C:\Users\bs01\Desktop\vasanthra\motivational image.jpg" alt="Motivation">
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: fitflexsupport@gmail.com</p>
+    <p>Location: Chennai, India</p>
+  </section>
+
+  <footer>
+    &copy; 2025 FitFlex. All rights reserved.
+  </footer>
+
+  <script>
+    const workouts = {
+      cardio: [
+        {name:'Jumping Jacks', img:"C:\Users\bs01\Desktop\vasanthra\jumping jacks image.jpg"},
+        {name:'High Knees', img:'https://www.google.com/imgres?q=high%20knees%20images%20for%20gym&imgurl=https%3A%2F%2Fworkoutlabs.com%2Ftrain%2Fsvg.php%3Fid%3D84974&imgrefurl=https%3A%2F%2Fworkoutlabs.com%2Fexercise-guide%2Fhigh-knees-front-knee-lifts-run-on-the-spot%2F&docid=v_83IK2qv-KblM&tbnid=Eu15PPPSVsfPxM&vet=12ahUKEwj0nYOyrNWPAxU1yqACHSRJAEQQM3oECBsQAA..i&w=800&h=534&hcb=2&ved=2ahUKEwj0nYOyrNWPAxU1yqACHSRJAEQQM3oECBsQAA'},
+        {name:'Mountain Climbers', img:'images/cardio3.jpg'},
+        {name:'Burpees', img:'images/cardio4.jpg'},
+        {name:'Skaters', img:'images/cardio5.jpg'}
+      ],
+      dumbbell: [
+        {name:'Bicep Curls', img:'images/dumbbell1.jpg'},
+        {name:'Dumbbell Squats', img:'images/dumbbell2.jpg'},
+        {name:'Dumbbell Lunges', img:'images/dumbbell3.jpg'},
+        {name:'Dumbbell Shoulder Press', img:'images/dumbbell4.jpg'},
+        {name:'Dumbbell Deadlifts', img:'images/dumbbell5.jpg'}
+      ],
+      back: [
+        {name:'Pull-Ups', img:'images/back1.jpg'},
+        {name:'Bent Over Rows', img:'images/back2.jpg'},
+        {name:'Lat Pulldown', img:'images/back3.jpg'},
+        {name:'Deadlifts', img:'images/back4.jpg'},
+        {name:'Supermans', img:'images/back5.jpg'}
+      ],
+      chest: [
+        {name:'Push-Ups', img:'images/chest1.jpg'},
+        {name:'Incline Push-Ups', img:'images/chest2.jpg'},
+        {name:'Chest Dips', img:'images/chest3.jpg'},
+        {name:'Dumbbell Bench Press', img:'images/chest4.jpg'},
+        {name:'Chest Fly', img:'images/chest5.jpg'}
+      ]
+    };
+
+    function showCategory(cat){
+      const container = document.getElementById('workoutCards');
+      container.innerHTML = '';
+      workouts[cat].forEach(w=>{
+        container.innerHTML += `
+          <div class="workout-card">
+            <img src="${w.img}" alt="${w.name}">
+            <h3>${w.name}</h3>
+          </div>
+        `;
+      });
+    }
+
+    // Show cardio by default
+    showCategory('cardio');
+
+    // Login functionality
+    function showLogin(){
+      document.getElementById('login-page').style.display = 'block';
+      document.getElementById('home').scrollIntoView({behavior:'smooth'});
+    }
+
+    function login(){
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const msg = document.getElementById('login-msg');
+
+      if(username === "admin" && password === "1234"){
+        msg.style.color = "limegreen";
+        msg.textContent = "Login successful!";
+      } else {
+        msg.style.color = "red";
+        msg.textContent = "Invalid username or password!";
+      }
+    }
+  </script>
+
+</body>
+</html>
